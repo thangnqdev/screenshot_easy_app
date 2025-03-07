@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#2196F3">
+    <!-- Trạng thái mặc định -->
+    <item>
+        <shape>
+            <solid android:color="#2196F3"/> <!-- Màu mặc định -->
+            <corners android:radius="10dp"/>
+        </shape>
+    </item>
+
+    <!-- Trạng thái khi nhấn (pressed) -->
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="#1976D2"/> <!-- Màu đậm hơn khi nhấn -->
+            <corners android:radius="10dp"/>
+        </shape>
+    </item>
+</ripple>
