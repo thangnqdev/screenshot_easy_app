@@ -44,7 +44,6 @@ public class DbHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Xóa bảng cũ nếu có và tạo lại
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_API_TOKEN);
         onCreate(db);
     }
