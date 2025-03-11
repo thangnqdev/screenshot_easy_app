@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/custom_bg_dialog"
+    style="@style/CustomDialog"
+    android:orientation="vertical"
+    android:paddingHorizontal="30dp"
+    android:paddingTop="30dp"
+    android:paddingBottom="40dp">
+
+    <TextView
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        android:text="API/TOKEN"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:singleLine="true"
+        android:textColorHint="#808080"
+        android:padding="12dp"
+        android:background="@drawable/custom_edt"
+        android:id="@+id/edtBaseUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Base url "
+        android:textColor="@color/black"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:singleLine="true"
+        android:textColorHint="#808080"
+        android:layout_marginVertical="12dp"
+        android:padding="12dp"
+        android:background="@drawable/custom_edt"
+        android:id="@+id/edtToken"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Token "
+        android:textColor="@color/black"
+        tools:ignore="HardcodedText" />
+
+    <LinearLayout
+        android:id="@+id/lnButtonSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="6dp"
+        android:background="@drawable/custom_bg_button"
+        android:gravity="center"
+        android:padding="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lưu"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/blnButtonCancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button_cancel"
+        android:gravity="center"
+        android:padding="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hủy"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+</LinearLayout>

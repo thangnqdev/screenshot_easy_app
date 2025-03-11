@@ -4,172 +4,235 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="12dp"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".MainActivity">
     <LinearLayout
-        android:layout_weight="1"
-        android:orientation="horizontal"
+        android:padding="12dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
-        <TextView
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:text="Project: "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:ignore="HardcodedText" />
-        <TextView
-            android:visibility="gone"
-            android:textSize="12sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:id="@+id/tvProjectId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:ignore="HardcodedText" />
-        <TextView
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:id="@+id/tvProjectName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:ignore="HardcodedText" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tvNote"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lưu ý: Cấp quyền Accessibility để chụp ảnh màn hình"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            tools:ignore="HardcodedText" />
-
+        android:layout_height="match_parent">
         <LinearLayout
-            android:id="@+id/lnRequestOverlayPermission"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="6dp"
-            android:background="@drawable/custom_bg_button"
-            android:gravity="center"
-            android:orientation="horizontal">
-
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
             <TextView
-                android:layout_width="0dp"
+                android:id="@+id/tvProjectId"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tvProjectName"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_weight="1"
-                android:text="Quyền hiển thị trên ứng dụng khác"
-                android:textColor="@color/white"
-                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20sp"
                 tools:ignore="HardcodedText" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/btnSwitchOverlayPermission"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
-                tools:ignore="UseSwitchCompatOrMaterialXml" />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tvTitleBaseUrl"
+                    android:visibility="gone"
+                    android:textColor="@color/black"
+                    android:text="BASE URL: "
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:ignore="HardcodedText" />
+                <TextView
+                    android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:id="@+id/tvBaseUrl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tvTitleToken"
+                    android:visibility="gone"
+                    android:textColor="@color/black"
+                    android:text="TOKEN: "
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:ignore="HardcodedText" />
+                <TextView
+                    android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:id="@+id/tvToken"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/lnRequestAccessibilityPermission"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_bg_button"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="0dp"
+                android:id="@+id/tvNote"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_weight="1"
-                android:text="Quyền trợ năng (Accessibility)"
-                android:textColor="@color/white"
-                android:textStyle="bold"
+                android:layout_marginVertical="6dp"
+                android:text="Lưu ý: Cấp quyền Accessibility để chụp ảnh màn hình"
+                android:textColor="@color/black"
+                android:textSize="12sp"
                 tools:ignore="HardcodedText" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/btnSwitchAccessibilityPermission"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/lnNextToOptionActivity"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
-                tools:ignore="UseSwitchCompatOrMaterialXml" />
-        </LinearLayout>
+                android:background="@drawable/custom_bg_button"
+                android:orientation="horizontal"
+                android:padding="12dp">
 
-        <LinearLayout
-            android:id="@+id/lnNextToListProjectActivity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="6dp"
-            android:background="@drawable/custom_bg_button"
-            android:orientation="horizontal"
-            android:padding="12dp">
+                <TextView
+                    android:id="@+id/tvNextToOptionActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cài đặt API/TOKEN"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvNextToListProjectActivity"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/lnRequestOverlayPermission"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Danh sách Project"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                tools:ignore="HardcodedText" />
-        </LinearLayout>
+                android:layout_marginVertical="6dp"
+                android:background="@drawable/custom_bg_button"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/lnOptionOverlay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_bg_button"
-            android:gravity="center"
-            android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:text="Quyền hiển thị trên ứng dụng khác"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
 
-            <TextView
-                android:layout_width="0dp"
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/btnSwitchOverlayPermission"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lnRequestAccessibilityPermission"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_weight="1"
-                android:text="Hiển thị overlay"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                tools:ignore="HardcodedText" />
+                android:background="@drawable/custom_bg_button"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/btnSwitchOverlayOption"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:text="Quyền trợ năng (Accessibility)"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/btnSwitchAccessibilityPermission"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lnNextToListProjectActivity"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
-                tools:ignore="UseSwitchCompatOrMaterialXml" />
-        </LinearLayout>
+                android:layout_marginVertical="6dp"
+                android:background="@drawable/custom_bg_button"
+                android:orientation="horizontal"
+                android:padding="12dp">
 
-        <LinearLayout
-            android:id="@+id/lnCancelTargetProjectId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_bg_button"
-            android:orientation="horizontal"
-            android:padding="12dp"
-            android:visibility="gone">
-
-            <TextView
-                android:id="@+id/tvCancelTargetProjectId"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tvNextToListProjectActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Danh sách Project"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lnShowOverlay"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Hủy target project id"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                tools:ignore="HardcodedText" />
+                android:background="@drawable/custom_bg_button"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hiển thị overlay"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lnHideOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
+                android:background="@drawable/custom_bg_button"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tắt overlay"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lnCancelTargetProjectId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_bg_button"
+                android:orientation="horizontal"
+                android:padding="12dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvCancelTargetProjectId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hủy target project id"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

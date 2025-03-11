@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -19,6 +19,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Screenshot_app"
         tools:targetApi="31">
+        <activity
+            android:name=".view.activity.BaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.OptionActivity"
+            android:exported="false" />
         <activity
             android:name=".view.activity.ListProjectActivity"
             android:exported="false" />

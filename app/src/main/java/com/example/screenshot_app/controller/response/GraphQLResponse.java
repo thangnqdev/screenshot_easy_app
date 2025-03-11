@@ -1,5 +1,5 @@
 package com.example.screenshot_app.controller.response;
-import com.example.screenshot_app.model.Project;
+import com.example.screenshot_app.model.project.Project;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

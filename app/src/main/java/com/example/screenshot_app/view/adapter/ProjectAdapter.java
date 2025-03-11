@@ -12,17 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.screenshot_app.R;
-import com.example.screenshot_app.controller.interfaces.EventItemClickListenerInterface;
-import com.example.screenshot_app.model.Project;
+import com.example.screenshot_app.controller.interfaces.EventItemClickListenerInterfaceProject;
+import com.example.screenshot_app.model.project.Project;
 
 import java.util.List;
 
 public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHolder> {
     private final List<Project> projectList;
-    public EventItemClickListenerInterface listener;
+    public EventItemClickListenerInterfaceProject listener;
 
 
-    public ProjectAdapter(List<Project> projectList, EventItemClickListenerInterface listener) {
+    public ProjectAdapter(List<Project> projectList, EventItemClickListenerInterfaceProject listener) {
         this.projectList = projectList;
         this.listener = listener;
     }
@@ -59,7 +59,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             lnItemProject = itemView.findViewById(R.id.lnItemProject);
         }
 
-        public void bind(Project project, EventItemClickListenerInterface listener) {
+        public void bind(Project project, EventItemClickListenerInterfaceProject listener) {
             lnItemProject.setOnClickListener(v -> listener.onItemClick(project));
         }
     }

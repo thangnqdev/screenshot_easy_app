@@ -14,8 +14,8 @@ import android.util.Log
 import android.view.Display
 import android.view.accessibility.AccessibilityEvent
 import com.example.screenshot_app.controller.client.SendImageDataToServer
-import com.example.screenshot_app.controller.constant.Constant
-import com.example.screenshot_app.controller.interfaces.UploadInterface
+import com.example.screenshot_app.controller.services.interfaces.UploadServiceInterface
+import com.example.screenshot_app.controller.client.ApiConfigManager
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -24,6 +24,8 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -38,7 +40,7 @@ class ScreenshotService : AccessibilityService() {
         private var instance: ScreenshotService? = null
         private var isServiceRunning = false
 
-         fun isRunning(context: Context): Boolean = isServiceRunning
+        fun isRunning(context: Context): Boolean = isServiceRunning
 
         fun takeScreenshot() {
             instance?.performScreenshot()
@@ -122,41 +124,68 @@ class ScreenshotService : AccessibilityService() {
             resolver.openOutputStream(imageUri)?.use { outputStream ->
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
             }
-            upLoadImageToServer(imageUri)
+            upload(uri)
         }
     }
-    private fun upLoadImageToServer(imageUri: Uri) {
+
+    private fun upload(imageUri: Uri) {
+        val apiConfig: Map<String, String> = ApiConfigManager.getApiConfig(this)
+        var baseUrl = apiConfig["baseUrl"]
+        Log.e("upload: ", baseUrl.toString())
+        var token = apiConfig["token"]
+        if(baseUrl.isNullOrEmpty()){
+            baseUrl = "https://cms.bolttech.space"
+        }
+        if(token.isNullOrEmpty()){
+            token = "KjzcGYUfUJQdLca7SEx2hpZkXe5STOwj"
+        }
+        Log.e("upload: ", token.toString())
+        if (!baseUrl.startsWith("http://") && !baseUrl.startsWith("https://")) {
+            baseUrl = "https://$baseUrl" // Thêm scheme nếu thiếu
+        }
+        val retrofit = Retrofit.Builder()
+            .baseUrl(baseUrl.toString())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val apiService = retrofit.create(UploadServiceInterface::class.java)
+
         val file = File(getRealPathFromURI(imageUri))
-        val requestFile = file.asRequestBody("image/png".toMediaTypeOrNull())
-        val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
+        val requestBody = file.asRequestBody("image/png".toMediaTypeOrNull())
+        val multipartBody = MultipartBody.Part.createFormData("file", file.name, requestBody)
+        // Thực hiện request
+        val authorization = "Bearer $token"
+        apiService.uploadFile(authorization, multipartBody)
+            .enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    if (response.isSuccessful) {
+                        // Đọc JSON response nếu có
+                        val jsonString = response.body()?.string() ?: return
+                        val jsonObject = JSONObject(jsonString)
+                        val dataObject = jsonObject.getJSONObject("data")
 
-        val retrofit = UploadFileService.getClient().create(UploadInterface::class.java)
-        val call = retrofit.uploadImage(body, "Bearer " + Constant.TOKEN)
+                        val id = dataObject.getString("id")
+                        val storage = dataObject.getString("storage")
+                        val filenameDownload = dataObject.getString("filename_download")
 
-        call.enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                if (response.isSuccessful) {
-                    val jsonString = response.body()?.string() ?: return
-                    val jsonObject = JSONObject(jsonString)
-                    val dataObject = jsonObject.getJSONObject("data")
-
-                    val id = dataObject.getString("id")
-                    val storage = dataObject.getString("storage")
-                    val filenameDownload = dataObject.getString("filename_download")
-
-                    Log.d("JSON Data", "id: $id, storage: $storage, filename_download: $filenameDownload")
-                    val sendImageService = SendImageDataToServer(this@ScreenshotService)
-                    sendImageService.sendImageDataToServer(id, storage, filenameDownload)
-
-                } else {
-                    Log.e("onResponse", "Lỗi: ${response.errorBody()?.string()}")
+                        Log.d(
+                            "Upload Success",
+                            "id: $id, storage: $storage, filename_download: $filenameDownload"
+                        )
+                        val sendImageService = SendImageDataToServer(this@ScreenshotService)
+                        sendImageService.sendImageDataToServer(id, storage, filenameDownload)
+                    } else {
+                        Log.e("Upload Error", "Response Error: ${response.errorBody()?.string()}")
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.e("onFailure", "Lỗi: ${t.message}")
-            }
-        })
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Log.e("Upload Error", "Exception: ${t.message}")
+                }
+            })
     }
 
     private fun getRealPathFromURI(uri: Uri): String {
